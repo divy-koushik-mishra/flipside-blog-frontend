@@ -1,0 +1,36 @@
+---
+// src/pages/blog/[slug].astro
+import Layout from "../../layouts/Layout.astro";
+import { getBlogBySlug, getAllBlogSlugs } from "../../lib/sanityConfig";
+import { portableTextToHtml } from "../../lib/portableTextToHtml";
+
+export async function getStaticPaths() {
+  const allBlogPosts = await getAllBlogSlugs();
+  return allBlogPosts.map((post: { slug: { current: any } }) => ({
+    params: { slug: post.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+
+const blog = await getBlogBySlug(slug);
+
+if (!blog) {
+  return Astro.redirect("/404");
+}
+
+// Convert Portable Text to HTML
+const contentHtml = blog.content ? portableTextToHtml(blog.content) : "";
+---
+
+<Layout>
+  <main class="container py-16 max-w-3xl mx-auto">
+    <h1 class="text-4xl font-bold">{blog.title}</h1>
+    <p class="text-gray-600 mt-2">
+      {new Date(blog.publishedAt).toLocaleDateString()}
+    </p>
+
+    <!-- Render the HTML content -->
+    <div class="mt-8 prose prose-lg" set:html={contentHtml} />
+  </main>
+</Layout>

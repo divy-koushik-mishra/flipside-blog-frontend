@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+@config {
+  theme: {
+    extend: {
+      colors: {
+        primary: {
+          light: '#a5b4fc',
+          DEFAULT: '#818cf8',
+          dark: '#6366f1',
+        },
+        secondary: {
+          light: '#fecdd3',
+          DEFAULT: '#fda4af',
+          dark: '#fb7185',
+        },
+        tertiary: {
+          light: '#c4b5fd',
+          DEFAULT: '#a78bfa',
+          dark: '#8b5cf6',
+        },
+        surface: {
+          light: '#f9fafb',
+          DEFAULT: '#f3f4f6',
+          dark: '#e5e7eb',
+        },
+      }
+    }
+  }
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  
+  .neomorphic {
+    box-shadow: 
+      8px 8px 16px rgba(174, 174, 192, 0.4),
+      -8px -8px 16px rgba(255, 255, 255, 0.8);
+  }
+  
+  .chart-bar {
+    height: 120px;
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+  }
+  
+  .chart-bar div {
+    width: 12px;
+    border-radius: 6px 6px 0 0;
+    background: linear-gradient(to top, #818cf8, #a5b4fc);
+  }
